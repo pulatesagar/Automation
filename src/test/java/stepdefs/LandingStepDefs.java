@@ -42,46 +42,51 @@ public class LandingStepDefs extends TestBase {
 	}
 	
 	
-	
-@Given("browser is open")
-public void browser_is_open() throws Exception {
-	/* Various ways of invoking Web Driver*/
-	/* Mehtod - 1*/
-	DriverManager driverManager = DriverFactory.getDriverManager("chrome");
-	WebDriver driver = driverManager.getDriver();
-	driverManager.maximizeBrowser();
-	driverManager.navigateToDriver(server_ui);
-	
-	/* OR Mehtod - 2*/
-	/*
-	 *WebDriver driver = new ChromeDriver();
-	 *driver.manage().timeouts().implicitlyWait(20000, TimeUnit.MILLISECONDS);
-	 *driver.manage().window().maximize();
-	 *driver.get(serverUI);
-	*/
-	
+	@Given("browser is open")
+	public void browser_is_open() throws Exception {
+		/* Various ways of invoking Web Driver*/
+		/* Mehtod - 1*/
+		
+		
+		DriverManager driverManager = DriverFactory.getDriverManager("chrome");
+		WebDriver driver = driverManager.getDriver();
+		driverManager.maximizeBrowser();
+		driverManager.navigateToDriver(server_ui);
+		
+		/* OR Mehtod - 2*/
+		/*
+		 *WebDriver driver = new ChromeDriver();
+		 *driver.manage().timeouts().implicitlyWait(20000, TimeUnit.MILLISECONDS);
+		 *driver.manage().window().maximize();
+		 *driver.get(serverUI);
+		*/
+		
 
-	/* OR Mehtod - 3*/
-	/*
-	 WebDriver driver = WebDriverManagerSingleton.getInstanceOfWebDriverManager().getDriver();
-	*/
-	
-	/* OR Mehtod - 4*/
-	/*
-	WebDriver driver = WebDriverManagerSimple.getDriver("chrome");
-	*/
-	scn.write("Chrome Driver invoked and URL navigated as: " + server_ui);
-	//Assign driver and set page Objects to Test Context 
-	testContextUI.setDriver(driver);
-	testContextUI.initializePageObjectClasses(driver, scn);
-}
+		/* OR Mehtod - 3*/
+		/*
+		 WebDriver driver = WebDriverManagerSingleton.getInstanceOfWebDriverManager().getDriver();
+		*/
+		
+		/* OR Mehtod - 4*/
+		/*
+		WebDriver driver = WebDriverManagerSimple.getDriver("chrome");
+		*/
+		scn.write("Chrome Driver invoked and URL navigated as: " + server_ui);
+		//Assign driver and set page Objects to Test Context 
+		testContextUI.setDriver(driver);
+		testContextUI.initializePageObjectClasses(driver, scn);
+	}
 
+	@When("user clicks on login link")
+	public void user_clicks_on_login_link() {
+		testContextUI.landingPageObjects().clickLoginLinks();
+	}
 
-@When("landing page displayed and login link should be available on page.")
-public void landing_page_displayed_and_login_link_should_be_available_on_page() {
-    
-	testContextUI.landingPageObjects().clickLoginLinks();
-}
+	@Then("user should be redirected to the login page")
+	public void user_should_be_redirected_to_the_login_page() {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new cucumber.api.PendingException();
+	}
 
 
 
